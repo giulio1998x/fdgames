@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/*
+ * OBS Browser Source needs a genuinely transparent page: no body background,
+ * and no opaque box behind the overlay. `.overlay-root` is set by
+ * app/overlay/layout.tsx, so only the overlay routes are stripped.
+ */
+html:has(.overlay-root),
+body:has(.overlay-root) {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.overlay-root {
+  background: transparent;
+}
+
+/* Cards arrive from the deck rather than appearing in place. */
+@keyframes dealIn {
+  from {
+    opacity: 0;
+    transform: translate(40px, -60px) rotate(12deg) scale(0.86);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+}
